@@ -34,9 +34,7 @@ function Menu(props){
         <Logo src={props.logo} alt=""></Logo>
         <NavStyle onClick={props.updImg}>
             <li><Link to='/home'>Home</Link></li>
-            <li><Link to='/'>All breeds</Link></li>
-            <li><Link to='/'>BreedOverview</Link></li>
-            <li><Link to='/'>RandomBreed</Link></li>
+            <li><Link to='/'>First page</Link></li>
         </NavStyle>
       </MenuStyle>
     );
