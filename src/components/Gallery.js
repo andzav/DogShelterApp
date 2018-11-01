@@ -1,6 +1,8 @@
 import React from 'react';
-import ImageWithTitle from './ImageWithTitle';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+import ImageWithTitle from './ImageWithTitle';
 
 const ImgContainer = styled.div`
   display: flex;
@@ -14,37 +16,43 @@ const LoadMore = styled.button`
   font-size: 20px;
   width: 250px;
   margin-left: calc(50% - 125px);
+  display: ${props => (props.visible ? 'block' : 'none')}
 `;
 
-class Gallery extends React.Component{
-      constructor(props){
-        super(props);
-        this.state = {max: this.props.max, buttonVisible: "block"};
+class Gallery extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { max: this.props.max, isVisible: true };
+  }
+
+  handleClick = () => {
+    this.setState((state) => {
+      if (state.max + 3 >= this.props.imgAvailable.length) {
+        return { isVisible: false, max: state.max + 3 };
       }
 
-      handleClick = () => {
-        this.setState({max: this.state.max+3});
-        this.setState((state) => {
-          if (state.max >= this.props.imgAvailable.length){
-            return {buttonVisible: this.setState({buttonVisible: "none"})};
-          }else{
-            return {buttonVisible: this.setState({buttonVisible: "block"})};
-          }
-        })
-      }
+      return { isVisible: true, max: state.max + 3 };
+    });
+  }
 
-      render(){
-        return (
-          <>
-            <ImgContainer>
-              {this.props.imgAvailable.slice(0, this.state.max).map(image => 
-                <ImageWithTitle key={image.toString()} image={image}/>
-              )}
-            </ImgContainer>
-            <LoadMore onClick={this.handleClick} style={{display:this.state.buttonVisible}}>See more</LoadMore>
-          </>
-        )
-      }
+  render() {
+    const { max, isVisible } = this.state;
+    return (
+      <React.Fragment>
+        <ImgContainer>
+          {this.props.imgAvailable.slice(0, max).map(image => (
+            <ImageWithTitle key={image.toString()} image={image}/>
+          ))}
+        </ImgContainer>
+        <LoadMore onClick={this.handleClick} visible={isVisible}>See more</LoadMore>
+      </React.Fragment>
+    );
+  }
 }
+
+Gallery.propTypes = {
+  max: PropTypes.number,
+  imgAvailable: PropTypes.array,
+};
 
 export default Gallery;

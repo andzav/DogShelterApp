@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ImageWrap = styled.figure`
   margin-right: 100px;
@@ -18,8 +19,8 @@ const ImageCaption = styled.figcaption`
   text-transform: capitalize;
 `;
 
-function ImageWithTitle(props){
-  let breed = props.image.split('/')[4].replace('-', ' ');
+function ImageWithTitle(props) {
+  const breed = props.image.split('/')[4].replace('-', ' ');
   return (
     <ImageWrap>
       <ImageView src={props.image} alt={breed}></ImageView>
@@ -27,5 +28,9 @@ function ImageWithTitle(props){
     </ImageWrap>
   );
 }
+
+ImageWithTitle.propTypes = {
+  image: PropTypes.string,
+};
 
 export default ImageWithTitle;

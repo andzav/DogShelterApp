@@ -1,36 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class DeviceInfo extends React.Component{
-    constructor(props) {
-      super(props);
-      this.state = { width: 0, height: 0, isMobile: false};
-    }
-    
-    componentDidMount() {
-      this.updateWindowDimensions();
-      window.addEventListener('resize', this.updateWindowDimensions);
-    }
-    
-    componentWillUnmount() {
-      window.removeEventListener('resize', this.updateWindowDimensions);
-    }
-    
-    updateWindowDimensions = () => {
-      this.setState({ width: window.innerWidth, height: window.innerHeight });
-      if (window.innerHeight > window.innerWidth){
-        this.setState({isMobile: true});
-      }else{
-        this.setState({isMobile: false});
-      }
-    }
+class DeviceInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isMobile: false };
+  }
 
-    render(){
-      return (
-        <>
-          {this.props.render(this.state)}
-        </>
-      )
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    if (window.innerHeight > window.innerWidth) {
+      this.setState({ isMobile: true });
+    } else {
+      this.setState({ isMobile: false });
     }
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        { this.props.render(this.state.isMobile) }
+      </React.Fragment>
+    );
+  }
 }
+
+DeviceInfo.propTypes = {
+  render: PropTypes.any,
+};
 
 export default DeviceInfo;

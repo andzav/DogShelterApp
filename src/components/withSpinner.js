@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from '../logo.svg';
 import styled, { keyframes } from 'styled-components';
+
+import logo from '../logo.svg';
 
 const SpinAnim = keyframes`
   from {
@@ -25,13 +26,13 @@ const AnimImg = styled.img`
   padding: 0;
 `;
 
-function Spinner(WrappedComponent) {
-    return class extends React.Component {  
-      render() {
-        const { isLoading } = this.props;
-        return isLoading ? <SpinnerDiv><AnimImg src={logo} alt="logo"></AnimImg></SpinnerDiv> : <WrappedComponent {...this.props} />;
-      }
-    };
-  }
+function withSpinner(WrappedComponent) {
+  return class A extends React.Component {
+    render() {
+      const { isLoading } = this.props;
+      return isLoading ? <SpinnerDiv><AnimImg src={logo} alt="logo"></AnimImg></SpinnerDiv> : <WrappedComponent {...this.props} />;
+    }
+  };
+}
 
-export default Spinner;
+export default withSpinner;

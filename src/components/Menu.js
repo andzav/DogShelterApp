@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import styled from 'styled-components';
 
 const MenuStyle = styled.div`
@@ -7,7 +9,7 @@ const MenuStyle = styled.div`
   width: 100%;
   height: 70px;
   a, a:link, a:visited, a:hover, a,active{
-    color: ${props => props.isMobile ? "red" : "black"}
+    color: ${props => (props.isMobile ? 'red' : 'black')}
   }
 `;
 
@@ -28,16 +30,22 @@ const Logo = styled.img`
 `;
 
 
-function Menu(props){
-    return (
-      <MenuStyle isMobile={props.isMobile}>
-        <Link to='/home'><Logo src={props.logo} alt=""></Logo></Link>
-        <NavStyle onClick={props.updImg}>
-            <li><Link to='/home'>Home</Link></li>
-            <li><Link to='/'>First page</Link></li>
-        </NavStyle>
-      </MenuStyle>
-    );
+function Menu(props) {
+  return (
+    <MenuStyle isMobile={props.isMobile}>
+      <Link to='/home'><Logo src={props.logo} alt=""></Logo></Link>
+      <NavStyle onClick={props.updImg}>
+        <li><Link to='/home'>Home</Link></li>
+        <li><Link to='/'>First page</Link></li>
+      </NavStyle>
+    </MenuStyle>
+  );
 }
+
+Menu.propTypes = {
+  isMobile: PropTypes.bool,
+  logo: PropTypes.string,
+  updImg: PropTypes.func,
+};
 
 export default Menu;

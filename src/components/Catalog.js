@@ -1,6 +1,9 @@
 import React from 'react';
-import ImageWithTitle from './ImageWithTitle';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+import ImageWithTitle from './ImageWithTitle';
+import media from '../Themes/MediaTemplate';
 
 const CatalogWrapper = styled.div`
   text-align: center;
@@ -9,17 +12,18 @@ const CatalogWrapper = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  text-align: center;
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @media (min-width: 992px){
+  ${media.desktop`
     width: 10%;
     display: inline-block;
     margin: 5%;
-  }
+  `}
+  ${media.mobile`
+    text-align: center;
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
+  `}
 `;
 
 const Input = styled.input`
@@ -29,9 +33,8 @@ const Input = styled.input`
 `;
 
 const CatalogContent = styled.div`
-  @media (min-width: 992px){
-    display: flex;
-  }
+  ${media.desktop`display: flex;`}
+  ${media.mobile`display: block;`}
 `;
 
 const ImagesWrapper = styled.div`
@@ -47,23 +50,27 @@ const ImagesWrapper = styled.div`
   }
 `;
 
-function Catalog(props){
-    return (
-      <CatalogWrapper>
-          <h1>Look at our dogs</h1>
-          <CatalogContent>
-            <FormWrapper>
-              <Input type="text"></Input>
-              <Input type="submit" value="Find"></Input>
-            </FormWrapper>
-            <ImagesWrapper>
-              {props.imgCatalog.map(image => 
-                <ImageWithTitle key={image.toString()} image={image}/>
-              )}
-            </ImagesWrapper>
-          </CatalogContent>
-      </CatalogWrapper>
-    );
+function Catalog(props) {
+  return (
+    <CatalogWrapper>
+      <h1>Look at our dogs</h1>
+      <CatalogContent>
+        <FormWrapper>
+          <Input type="text"></Input>
+          <Input type="submit" value="Find"></Input>
+        </FormWrapper>
+        <ImagesWrapper>
+          {props.imgCatalog.map(image => (
+            <ImageWithTitle key={image.toString()} image={image}/>
+          ))}
+        </ImagesWrapper>
+      </CatalogContent>
+    </CatalogWrapper>
+  );
 }
+
+Catalog.propTypes = {
+  imgCatalog: PropTypes.array,
+};
 
 export default Catalog;
