@@ -31,7 +31,7 @@ const Logo = styled.img`
 function Menu(props){
     return (
       <MenuStyle isMobile={props.isMobile}>
-        <Logo src={props.logo} alt=""></Logo>
+        <Link to='/home'><Logo src={props.logo} alt=""></Logo></Link>
         <NavStyle onClick={props.updImg}>
             <li><Link to='/home'>Home</Link></li>
             <li><Link to='/'>First page</Link></li>
