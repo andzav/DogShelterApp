@@ -31,7 +31,6 @@ class Gallery extends React.Component{
             return {buttonVisible: this.setState({buttonVisible: "block"})};
           }
         })
-        
       }
 
       render(){
