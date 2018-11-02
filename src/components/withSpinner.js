@@ -36,7 +36,7 @@ function withSpinner(WrappedComponent) {
   };
 }
 
-withSpinner.propsType = {
+withSpinner.propTypes = {
   isLoading: PropTypes.bool.isRequired,
 };
 

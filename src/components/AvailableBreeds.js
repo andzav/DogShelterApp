@@ -21,7 +21,7 @@ function AvailableBreeds(props) {
 AvailableBreeds.propTypes = {
   imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   max: PropTypes.number.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 export default AvailableBreeds;
