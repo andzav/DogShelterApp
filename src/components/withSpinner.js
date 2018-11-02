@@ -31,7 +31,11 @@ function withSpinner(WrappedComponent) {
   return class A extends React.Component {
     render() {
       const { isLoading } = this.props;
-      return isLoading ? <SpinnerDiv><AnimImg src={logo} alt="logo"></AnimImg></SpinnerDiv> : <WrappedComponent {...this.props} />;
+      return isLoading
+        ? <SpinnerDiv>
+            <AnimImg src={logo} alt="logo"></AnimImg>
+          </SpinnerDiv>
+        : <WrappedComponent {...this.props} />;
     }
   };
 }

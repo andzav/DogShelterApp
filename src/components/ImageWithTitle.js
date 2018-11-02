@@ -19,11 +19,11 @@ const ImageCaption = styled.figcaption`
   text-transform: capitalize;
 `;
 
-function ImageWithTitle(props) {
-  const breed = props.image.split('/')[4].replace('-', ' ');
+function ImageWithTitle({ image }) {
+  const breed = image.split('/')[4].replace('-', ' ');
   return (
     <ImageWrap>
-      <ImageView src={props.image} alt={breed}></ImageView>
+      <ImageView src={image} alt={breed}></ImageView>
       <ImageCaption>{breed}</ImageCaption>
     </ImageWrap>
   );

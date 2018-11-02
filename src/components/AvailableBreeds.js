@@ -10,17 +10,22 @@ const Wrapper = styled.div`
 `;
 
 function AvailableBreeds(props) {
+  const { imgAvailable, onClick, minDisplayAmount } = props;
   return (
     <Wrapper>
       <h1>{props.title}</h1>
-      <Gallery imgAvailable={props.imgAvailable} max={props.max}/>
+      <Gallery
+        imgAvailable={imgAvailable}
+        onClick={onClick}
+        minDisplayAmount={minDisplayAmount}/>
     </Wrapper>
   );
 }
 
 AvailableBreeds.propTypes = {
   imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  max: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  minDisplayAmount: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
 };
 

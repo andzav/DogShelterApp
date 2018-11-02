@@ -1,51 +1,76 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import ApiClient from '../services/ApiClient';
 import Overview from '../components/Overview';
 import AvailableBreeds from '../components/AvailableBreeds';
 import Catalog from '../components/Catalog';
 import withSpinner from '../components/withSpinner';
 
+import {
+  getBreedsMiddleware,
+  showMore,
+  resetGallery,
+} from '../actions/actions';
+
 const AvailableBreedsWithSpinner = withSpinner(AvailableBreeds);
 const CatalogWIthSpinner = withSpinner(Catalog);
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      img: [],
-      isLoading: false,
-      max: 3,
-    };
-  }
-
   componentDidMount() {
-    this.handleFetch(true);
-  }
-
-  handleFetch = async () => {
-    this.setState({ isLoading: true });
-    try {
-      const response = await ApiClient.get('https://dog.ceo/api/breeds/image/random/16');
-      setTimeout(() => this.setState({ img: response.message, isLoading: false }), 1500);
-    } catch (e) {
-      console.log(e);
-      this.setState({ isLoading: false });
-    }
+    const { loadBreeds, refreshGallery } = this.props;
+    loadBreeds();
+    refreshGallery();
   }
 
   render() {
-    const { img, isLoading, max } = this.state;
+    const {
+      img,
+      isLoading,
+      minDisplayAmount,
+      loadMore,
+    } = this.props;
     return (
       <React.Fragment>
         <Overview headImg={img[1]}/>
         <hr></hr>
-        <AvailableBreedsWithSpinner imgAvailable={img.slice(2, 11)} isLoading={isLoading} max={max} title="Available Breeds"/>
+        <AvailableBreedsWithSpinner
+          imgAvailable={img.slice(2, 11)}
+          onClick={() => loadMore()}
+          isLoading={isLoading}
+          minDisplayAmount={minDisplayAmount}
+          title="Available Breeds"/>
         <hr></hr>
-        <CatalogWIthSpinner imgCatalog={img.slice(11, 15)} isLoading={isLoading}/>
+        <CatalogWIthSpinner
+          imgCatalog={img.slice(11, 15)}
+          isLoading={isLoading}/>
       </React.Fragment>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  img: state.img,
+  minDisplayAmount: state.minDisplayAmount,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadMore: () => dispatch(showMore()),
+  loadBreeds: () => dispatch(getBreedsMiddleware()),
+  refreshGallery: () => dispatch(resetGallery()),
+});
+
+HomePage.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  img: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  minDisplayAmount: PropTypes.number.isRequired,
+  loadBreeds: PropTypes.func.isRequired,
+  loadMore: PropTypes.func.isRequired,
+  refreshGallery: PropTypes.func.isRequired,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomePage);

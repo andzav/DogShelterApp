@@ -1,9 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import ApiClient from '../services/ApiClient';
 import AvailableBreeds from '../components/AvailableBreeds';
 import withSpinner from '../components/withSpinner';
+
+import {
+  getBreedsMiddleware,
+  showMore,
+  resetGallery,
+} from '../actions/actions';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -45,33 +52,27 @@ const ReviewSubmit = styled.input`
 const AvailableBreedsWithSpinner = withSpinner(AvailableBreeds);
 
 class FirstPageContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      max: 3, buttonVisible: 'block', img: [], isLoading: false,
-    };
-  }
-
   componentDidMount() {
-    this.handleFetch(true);
-  }
-
-  handleFetch = async () => {
-    this.setState({ isLoading: true });
-    try {
-      const response = await ApiClient.get('https://dog.ceo/api/breeds/image/random/16');
-      setTimeout(() => this.setState({ img: response.message, isLoading: false }), 1500);
-    } catch (e) {
-      console.log(e);
-      this.setState({ isLoading: false });
-    }
+    const { loadBreeds, refreshGallery } = this.props;
+    loadBreeds();
+    refreshGallery();
   }
 
   render() {
-    const { img, max, isLoading } = this.state;
+    const {
+      img,
+      minDisplayAmount,
+      isLoading,
+      loadMore,
+    } = this.props;
     return (
       <Wrapper>
-        <AvailableBreedsWithSpinner imgAvailable={img.slice(2, 11)} isLoading={isLoading} max={max} title="Dog Shelter"/>
+        <AvailableBreedsWithSpinner
+          imgAvailable={img}
+          onClick={loadMore}
+          isLoading={isLoading}
+          minDisplayAmount={minDisplayAmount}
+          title="Dog Shelter"/>
         <ReviewForm>
           <h2>Leave your review</h2>
           <UserName type="text" placeholder="Fullname"></UserName>
@@ -83,4 +84,28 @@ class FirstPageContainer extends React.Component {
   }
 }
 
-export default FirstPageContainer;
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  img: state.img,
+  minDisplayAmount: state.minDisplayAmount,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadMore: () => dispatch(showMore()),
+  loadBreeds: () => dispatch(getBreedsMiddleware()),
+  refreshGallery: () => dispatch(resetGallery()),
+});
+
+FirstPageContainer.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  img: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  minDisplayAmount: PropTypes.number.isRequired,
+  loadBreeds: PropTypes.func.isRequired,
+  loadMore: PropTypes.func.isRequired,
+  refreshGallery: PropTypes.func.isRequired,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FirstPageContainer);

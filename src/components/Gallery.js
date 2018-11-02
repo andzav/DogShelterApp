@@ -20,38 +20,31 @@ const LoadMore = styled.button`
 `;
 
 class Gallery extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { max: this.props.max, isVisible: true };
-  }
-
-  handleClick = () => {
-    this.setState((state) => {
-      if (state.max + 3 >= this.props.imgAvailable.length) {
-        return { isVisible: false, max: state.max + 3 };
-      }
-
-      return { isVisible: true, max: state.max + 3 };
-    });
-  }
-
   render() {
-    const { max, isVisible } = this.state;
+    const {
+      minDisplayAmount,
+      imgAvailable,
+      onClick,
+    } = this.props;
+    const visible = minDisplayAmount < imgAvailable.length;
     return (
       <React.Fragment>
         <ImgContainer>
-          {this.props.imgAvailable.slice(0, max).map(image => (
+          {imgAvailable.slice(0, minDisplayAmount).map(image => (
             <ImageWithTitle key={image.toString()} image={image}/>
           ))}
         </ImgContainer>
-        <LoadMore onClick={this.handleClick} visible={isVisible}>See more</LoadMore>
+        <LoadMore onClick={onClick} visible={visible}>
+          See more
+        </LoadMore>
       </React.Fragment>
     );
   }
 }
 
 Gallery.propTypes = {
-  max: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  minDisplayAmount: PropTypes.number.isRequired,
   imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
