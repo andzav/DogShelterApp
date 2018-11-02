@@ -34,7 +34,7 @@ function Menu(props) {
   return (
     <MenuStyle isMobile={props.isMobile}>
       <Link to='/home'><Logo src={props.logo} alt=""></Logo></Link>
-      <NavStyle onClick={props.updImg}>
+      <NavStyle>
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/'>First page</Link></li>
       </NavStyle>
@@ -45,7 +45,6 @@ function Menu(props) {
 Menu.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   logo: PropTypes.string.isRequired,
-  updImg: PropTypes.func.isRequired,
 };
 
 export default Menu;
