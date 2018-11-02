@@ -51,8 +51,8 @@ class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
-  max: PropTypes.number,
-  imgAvailable: PropTypes.array,
+  max: PropTypes.number.isRequired,
+  imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Gallery;

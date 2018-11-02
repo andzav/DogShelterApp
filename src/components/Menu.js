@@ -43,9 +43,9 @@ function Menu(props) {
 }
 
 Menu.propTypes = {
-  isMobile: PropTypes.bool,
-  logo: PropTypes.string,
-  updImg: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
+  logo: PropTypes.string.isRequired,
+  updImg: PropTypes.func.isRequired,
 };
 
 export default Menu;

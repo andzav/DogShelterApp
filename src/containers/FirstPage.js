@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import ApiClient from '../services/ApiClient';
-import Gallery from '../components/Gallery';
+import AvailableBreeds from '../components/AvailableBreeds';
 import withSpinner from '../components/withSpinner';
 
 const Wrapper = styled.div`
@@ -42,7 +42,7 @@ const ReviewSubmit = styled.input`
   margin-bottom: 50px;
 `;
 
-const GalleryWithSpinner = withSpinner(Gallery);
+const AvailableBreedsWithSpinner = withSpinner(AvailableBreeds);
 
 class FirstPageContainer extends React.Component {
   constructor(props) {
@@ -71,8 +71,7 @@ class FirstPageContainer extends React.Component {
     const { img, max, isLoading } = this.state;
     return (
       <Wrapper>
-        <h1>DogShelter</h1>
-        <GalleryWithSpinner imgAvailable={img} max={max} isLoading={isLoading}/>
+        <AvailableBreedsWithSpinner imgAvailable={img.slice(2, 11)} isLoading={isLoading} max={max} title="Dog Shelter"/>
         <ReviewForm>
           <h2>Leave your review</h2>
           <UserName type="text" placeholder="Fullname"></UserName>

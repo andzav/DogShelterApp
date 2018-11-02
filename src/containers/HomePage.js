@@ -15,6 +15,7 @@ class HomePage extends Component {
     this.state = {
       img: [],
       isLoading: false,
+      max: 3,
     };
   }
 
@@ -34,12 +35,12 @@ class HomePage extends Component {
   }
 
   render() {
-    const { img, isLoading } = this.state;
+    const { img, isLoading, max } = this.state;
     return (
       <React.Fragment>
         <Overview headImg={this.state.img[1]}/>
         <hr></hr>
-        <AvailableBreedsWithSpinner imgAvailable={img.slice(2, 11)} isLoading={isLoading} max={3}/>
+        <AvailableBreedsWithSpinner imgAvailable={img.slice(2, 11)} isLoading={isLoading} max={max} title="Available Breeds"/>
         <hr></hr>
         <CatalogWIthSpinner imgCatalog={this.state.img.slice(11, 15)} isLoading={isLoading}/>
       </React.Fragment>

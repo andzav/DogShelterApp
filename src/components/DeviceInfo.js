@@ -34,7 +34,7 @@ class DeviceInfo extends React.Component {
 }
 
 DeviceInfo.propTypes = {
-  render: PropTypes.func,
+  render: PropTypes.func.isRequired,
 };
 
 export default DeviceInfo;

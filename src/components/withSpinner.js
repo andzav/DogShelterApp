@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import logo from '../logo.svg';
 
@@ -34,5 +35,9 @@ function withSpinner(WrappedComponent) {
     }
   };
 }
+
+withSpinner.propsType = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default withSpinner;

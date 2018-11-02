@@ -73,7 +73,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  headImg: PropTypes.string,
+  headImg: PropTypes.string.isRequired,
 };
 
 export default Header;

@@ -12,15 +12,16 @@ const Wrapper = styled.div`
 function AvailableBreeds(props) {
   return (
     <Wrapper>
-      <h1>Available Breeds</h1>
+      <h1>{props.title}</h1>
       <Gallery imgAvailable={props.imgAvailable} max={props.max}/>
     </Wrapper>
   );
 }
 
 AvailableBreeds.propTypes = {
-  imgAvailable: PropTypes.array,
-  max: PropTypes.number,
+  imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  max: PropTypes.number.isRequired,
+  title: PropTypes.string,
 };
 
 export default AvailableBreeds;

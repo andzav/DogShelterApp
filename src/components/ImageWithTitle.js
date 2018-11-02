@@ -30,7 +30,7 @@ function ImageWithTitle(props) {
 }
 
 ImageWithTitle.propTypes = {
-  image: PropTypes.string,
+  image: PropTypes.string.isRequired,
 };
 
 export default ImageWithTitle;

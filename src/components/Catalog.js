@@ -70,7 +70,7 @@ function Catalog(props) {
 }
 
 Catalog.propTypes = {
-  imgCatalog: PropTypes.array,
+  imgCatalog: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Catalog;
