@@ -7,7 +7,7 @@ import AvailableBreeds from '../components/AvailableBreeds';
 import withSpinner from '../components/withSpinner';
 
 import {
-  getBreedsMiddleware,
+  getBreeds,
   showMore,
   resetGallery,
 } from '../actions/actions';
@@ -92,7 +92,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadMore: () => dispatch(showMore()),
-  loadBreeds: () => dispatch(getBreedsMiddleware()),
+  loadBreeds: () => dispatch(getBreeds()),
   refreshGallery: () => dispatch(resetGallery()),
 });
 

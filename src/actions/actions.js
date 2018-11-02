@@ -23,10 +23,12 @@ export const resetGallery = () => ({
   type: RESET_DISPLAY_AMOUNT,
 });
 
-export const getBreeds = () => (dispatch) => {
+export const getBreeds = () => async (dispatch) => {
   dispatch(requestBreeds());
-  return ApiClient.get('https://dog.ceo/api/breeds/image/random/16')
-    .then(response => setTimeout(() => dispatch(recieveBreeds(response)), 1500));
+  try {
+    const response = await ApiClient.get('https://dog.ceo/api/breeds/image/random/16');
+    setTimeout(() => dispatch(recieveBreeds(response)), 1500);
+  } catch (e) {
+    console.log(e);
+  }
 };
-
-export const getBreedsMiddleware = () => dispatch => dispatch(getBreeds());
