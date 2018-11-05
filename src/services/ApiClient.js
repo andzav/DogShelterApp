@@ -37,9 +37,10 @@ class ApiClient {
         request.send(data);
       }
 
-      request.end((err, res) => (err
-        ? reject(err.response)
-        : resolve(res.body || res)));
+      request.end((err, res) => {
+        if (err) reject(err.response);
+        else setTimeout(() => resolve(res.body || res), 1500);
+      });
     }));
   }
 

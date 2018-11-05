@@ -19,27 +19,25 @@ const LoadMore = styled.button`
   display: ${props => (props.visible ? 'block' : 'none')}
 `;
 
-class Gallery extends React.Component {
-  render() {
-    const {
-      minDisplayAmount,
-      imgAvailable,
-      onClick,
-    } = this.props;
-    const visible = minDisplayAmount <= imgAvailable.length;
-    return (
-      <React.Fragment>
-        <ImgContainer>
-          {imgAvailable.map(image => (
-            <ImageWithTitle key={image.toString()} image={image}/>
-          ))}
-        </ImgContainer>
-        <LoadMore onClick={onClick} visible={visible}>
-          See more
-        </LoadMore>
-      </React.Fragment>
-    );
-  }
+function Gallery(props) {
+  const {
+    minDisplayAmount,
+    imgAvailable,
+    onClick,
+  } = props;
+  const visible = minDisplayAmount <= imgAvailable.length;
+  return (
+    <React.Fragment>
+      <ImgContainer>
+        {imgAvailable.map(image => (
+          <ImageWithTitle key={image.toString()} image={image}/>
+        ))}
+      </ImgContainer>
+      <LoadMore onClick={onClick} visible={visible}>
+        See more
+      </LoadMore>
+    </React.Fragment>
+  );
 }
 
 Gallery.propTypes = {

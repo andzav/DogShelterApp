@@ -1,6 +1,7 @@
 import {
   REQUEST_BREEDS,
   RECEIVE_BREEDS,
+  ERROR_BREEDS,
   RESET_DISPLAY_AMOUNT,
   INCREASE_DISPLAY_AMOUNT,
 } from '../actions/actions';
@@ -12,6 +13,7 @@ const InitialState = {
 };
 
 function getImages(state = InitialState, action) {
+  console.log(action);
   switch (action.type) {
     case REQUEST_BREEDS:
       return Object.assign({}, state, {
@@ -21,7 +23,12 @@ function getImages(state = InitialState, action) {
     case RECEIVE_BREEDS:
       return Object.assign({}, state, {
         isLoading: false,
-        img: action.images,
+        img: action.payload.message,
+      });
+    case ERROR_BREEDS:
+      return Object.assign({}, state, {
+        isLoading: false,
+        img: [],
       });
     case RESET_DISPLAY_AMOUNT:
       return Object.assign({}, state, {

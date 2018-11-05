@@ -9,11 +9,19 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
+const Title = styled.h1`
+  text-transform: capitalize;
+`;
+
 function AvailableBreeds(props) {
-  const { imgAvailable, onClick, minDisplayAmount } = props;
+  const {
+    imgAvailable,
+    onClick,
+    minDisplayAmount,
+  } = props;
   return (
     <Wrapper>
-      <h1>{props.title}</h1>
+      <Title>{props.title}</Title>
       <Gallery
         imgAvailable={imgAvailable}
         onClick={onClick}

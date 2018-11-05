@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ImageWrap = styled.figure`
   margin-right: 100px;
@@ -21,11 +22,14 @@ const ImageCaption = styled.figcaption`
 
 function ImageWithTitle({ image }) {
   const breed = image.split('/')[4].replace('-', ' ');
+  const breedLink = `/breed/${breed.split(' ')[0]}`;
   return (
-    <ImageWrap>
-      <ImageView src={image} alt={breed}></ImageView>
-      <ImageCaption>{breed}</ImageCaption>
-    </ImageWrap>
+    <Link to={breedLink}>
+      <ImageWrap>
+        <ImageView src={image} alt={breed}></ImageView>
+        <ImageCaption>{breed}</ImageCaption>
+      </ImageWrap>
+    </Link>
   );
 }
 

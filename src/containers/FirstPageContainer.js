@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
 
+import { getAllImagesDisplay } from '../selectors';
 import FirstPage from '../components/FirstPage';
 
 import {
-  getBreeds,
+  getRandomBreedsImages,
   showMore,
   resetGallery,
 } from '../actions/actions';
 
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
-  img: state.img.slice(0, state.minDisplayAmount),
+  img: getAllImagesDisplay(state),
   minDisplayAmount: state.minDisplayAmount,
 });
 
 const mapDispatchToProps = dispatch => ({
   loadMore: () => dispatch(showMore()),
-  loadBreeds: () => dispatch(getBreeds()),
+  loadBreeds: () => dispatch(getRandomBreedsImages()),
   refreshGallery: () => dispatch(resetGallery()),
 });
 
