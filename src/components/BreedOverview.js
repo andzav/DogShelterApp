@@ -14,6 +14,7 @@ class BreedOverviewPage extends Component {
       loadMore,
       img,
       match,
+      count,
     } = this.props;
     const title = img.length > 0 ? match.params.breed : 'No images found. Sorry';
     return (
@@ -21,6 +22,7 @@ class BreedOverviewPage extends Component {
         <AvailableBreedsWithSpinner
           imgAvailable={img}
           onClick={loadMore}
+          count={count}
           isLoading={isLoading}
           minDisplayAmount={minDisplayAmount}
           title={title}/>
@@ -47,6 +49,7 @@ BreedOverviewPage.propTypes = {
   match: PropTypes.any.isRequired,
   loadMore: PropTypes.func.isRequired,
   refreshGallery: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 export default BreedOverviewPage;

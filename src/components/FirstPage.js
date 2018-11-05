@@ -51,6 +51,7 @@ class FirstPage extends React.Component {
       minDisplayAmount,
       isLoading,
       loadMore,
+      count,
     } = this.props;
     return (
       <Wrapper>
@@ -58,6 +59,7 @@ class FirstPage extends React.Component {
           imgAvailable={img}
           onClick={loadMore}
           isLoading={isLoading}
+          count={count}
           minDisplayAmount={minDisplayAmount}
           title="Dog Shelter"/>
         <ReviewForm>
@@ -84,6 +86,7 @@ FirstPage.propTypes = {
   loadBreeds: PropTypes.func.isRequired,
   loadMore: PropTypes.func.isRequired,
   refreshGallery: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 export default FirstPage;

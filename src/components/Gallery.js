@@ -24,8 +24,9 @@ function Gallery(props) {
     minDisplayAmount,
     imgAvailable,
     onClick,
+    count,
   } = props;
-  const visible = minDisplayAmount <= imgAvailable.length;
+  const visible = count ? minDisplayAmount < count : minDisplayAmount <= imgAvailable.length;
   return (
     <React.Fragment>
       <ImgContainer>
@@ -44,6 +45,7 @@ Gallery.propTypes = {
   onClick: PropTypes.func.isRequired,
   minDisplayAmount: PropTypes.number.isRequired,
   imgAvailable: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  count: PropTypes.number,
 };
 
 export default Gallery;

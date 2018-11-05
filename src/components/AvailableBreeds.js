@@ -18,6 +18,7 @@ function AvailableBreeds(props) {
     imgAvailable,
     onClick,
     minDisplayAmount,
+    count,
   } = props;
   return (
     <Wrapper>
@@ -25,6 +26,7 @@ function AvailableBreeds(props) {
       <Gallery
         imgAvailable={imgAvailable}
         onClick={onClick}
+        count={count}
         minDisplayAmount={minDisplayAmount}/>
     </Wrapper>
   );
@@ -35,6 +37,7 @@ AvailableBreeds.propTypes = {
   onClick: PropTypes.func.isRequired,
   minDisplayAmount: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  count: PropTypes.number,
 };
 
 export default AvailableBreeds;

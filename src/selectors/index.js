@@ -27,3 +27,8 @@ export const getMainImage = createSelector(
   getAllImagesSelector,
   images => images[0] || '',
 );
+
+export const getImageCount = createSelector(
+  getAllImagesSelector,
+  images => images.length,
+);

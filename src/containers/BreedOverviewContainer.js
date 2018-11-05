@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getAllImagesDisplay } from '../selectors';
+import { getAllImagesDisplay, getImageCount } from '../selectors';
 import BreedOverview from '../components/BreedOverview';
 
 import {
@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
   isLoading: state.isLoading,
   img: getAllImagesDisplay(state),
   minDisplayAmount: state.minDisplayAmount,
+  count: getImageCount(state),
 });
 
 const mapDispatchToProps = dispatch => ({
