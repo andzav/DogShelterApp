@@ -5,11 +5,13 @@ import {
   INCREASE_DISPLAY_AMOUNT,
 } from '../actions/actions';
 
-function getImages(state = {
+const InitialState = {
   isLoading: false,
   img: [],
   minDisplayAmount: 3,
-}, action) {
+};
+
+function getImages(state = InitialState, action) {
   switch (action.type) {
     case REQUEST_BREEDS:
       return Object.assign({}, state, {

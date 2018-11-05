@@ -1,16 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import AvailableBreeds from '../components/AvailableBreeds';
-import withSpinner from '../components/withSpinner';
-
-import {
-  getBreeds,
-  showMore,
-  resetGallery,
-} from '../actions/actions';
+import AvailableBreeds from './AvailableBreeds';
+import withSpinner from './WithSpinner';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -51,13 +44,7 @@ const ReviewSubmit = styled.input`
 
 const AvailableBreedsWithSpinner = withSpinner(AvailableBreeds);
 
-class FirstPageContainer extends React.Component {
-  componentDidMount() {
-    const { loadBreeds, refreshGallery } = this.props;
-    loadBreeds();
-    refreshGallery();
-  }
-
+class FirstPage extends React.Component {
   render() {
     const {
       img,
@@ -82,21 +69,15 @@ class FirstPageContainer extends React.Component {
       </Wrapper>
     );
   }
+
+  componentDidMount() {
+    const { loadBreeds, refreshGallery } = this.props;
+    loadBreeds();
+    refreshGallery();
+  }
 }
 
-const mapStateToProps = state => ({
-  isLoading: state.isLoading,
-  img: state.img,
-  minDisplayAmount: state.minDisplayAmount,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadMore: () => dispatch(showMore()),
-  loadBreeds: () => dispatch(getBreeds()),
-  refreshGallery: () => dispatch(resetGallery()),
-});
-
-FirstPageContainer.propTypes = {
+FirstPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   img: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   minDisplayAmount: PropTypes.number.isRequired,
@@ -105,7 +86,4 @@ FirstPageContainer.propTypes = {
   refreshGallery: PropTypes.func.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FirstPageContainer);
+export default FirstPage;

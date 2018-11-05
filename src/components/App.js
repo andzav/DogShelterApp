@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import logo from '../logo.svg';
 
-import FirstPageContainer from '../containers/FirstPage';
+import FirstPageContainer from '../containers/FirstPageContainer';
 import Menu from './Menu';
 import DeviceInfo from './DeviceInfo';
-import HomePage from '../containers/HomePage';
+import HomePage from '../containers/HomePageContainer';
 
 function App() {
   return (

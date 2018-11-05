@@ -26,11 +26,11 @@ class Gallery extends React.Component {
       imgAvailable,
       onClick,
     } = this.props;
-    const visible = minDisplayAmount < imgAvailable.length;
+    const visible = minDisplayAmount <= imgAvailable.length;
     return (
       <React.Fragment>
         <ImgContainer>
-          {imgAvailable.slice(0, minDisplayAmount).map(image => (
+          {imgAvailable.map(image => (
             <ImageWithTitle key={image.toString()} image={image}/>
           ))}
         </ImgContainer>

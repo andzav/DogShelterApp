@@ -2,15 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-
-import DogShelterApp from './reducers/DogShelterApp';
 
 import './css/index.css';
+import configureStore from './store/configureStore';
 import App from './components/App';
 
-const store = createStore(DogShelterApp, applyMiddleware(thunkMiddleware));
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
