@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { getMainImage, getAvailableBreeds, getCatalogImages } from '../selectors';
 import HomePage from '../components/HomePage';
@@ -17,11 +18,11 @@ const mapStateToProps = state => ({
   minDisplayAmount: state.minDisplayAmount,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadMore: () => dispatch(showMore()),
-  loadBreeds: () => dispatch(getRandomBreedsImages()),
-  refreshGallery: () => dispatch(resetGallery()),
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  loadMore: showMore,
+  loadBreeds: getRandomBreedsImages,
+  refreshGallery: resetGallery,
+}, dispatch);
 
 export default connect(
   mapStateToProps,

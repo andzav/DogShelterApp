@@ -15,12 +15,12 @@ export const resetGallery = () => ({
   type: RESET_DISPLAY_AMOUNT,
 });
 
-export const getRandomBreedsImages = () => dispatch => dispatch({
+export const getRandomBreedsImages = () => ({
   type: 'BREEDS',
   payload: ApiClient.get('https://dog.ceo/api/breeds/image/random/16'),
 });
 
-export const getSelectedBreedImages = breed => dispatch => dispatch({
+export const getSelectedBreedImages = breed => ({
   type: 'BREEDS',
   payload: ApiClient.get(`https://dog.ceo/api/breed/${breed}/images/random/12`),
 });

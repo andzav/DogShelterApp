@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { getAllImagesDisplay, getImageCount } from '../selectors';
 import BreedOverview from '../components/BreedOverview';
@@ -16,11 +17,11 @@ const mapStateToProps = state => ({
   count: getImageCount(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadMore: () => dispatch(showMore()),
-  loadBreeds: breed => dispatch(getSelectedBreedImages(breed)),
-  refreshGallery: () => dispatch(resetGallery()),
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  loadMore: showMore,
+  loadBreeds: getSelectedBreedImages,
+  refreshGallery: resetGallery,
+}, dispatch);
 
 export default connect(
   mapStateToProps,
